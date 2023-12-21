@@ -1,9 +1,10 @@
+import 'package:uuid/uuid.dart';
+
+const uuid = Uuid();
+
 class Expense {
-  Expense(
-      {required this.title,
-      required this.iD,
-      required this.amount,
-      required this.date});
+  Expense({required this.title, required this.amount, required this.date})
+      : iD = uuid.v4();
 
   final String title;
   final String iD;
