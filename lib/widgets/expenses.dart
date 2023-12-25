@@ -1,6 +1,7 @@
 import 'package:expense_tracker/widgets/expense_list/expense_list.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -25,6 +26,14 @@ class _ExpensesState extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Expensy'),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(FontAwesomeIcons.solidSquarePlus))
+        ],
+      ),
       body: Column(children: [
         Expanded(
           child: ExpenseList(expense: _registeredExpenses),
