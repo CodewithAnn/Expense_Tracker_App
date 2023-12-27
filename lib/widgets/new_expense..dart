@@ -1,4 +1,6 @@
+import 'package:expense_tracker/models/expense.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key});
@@ -10,6 +12,27 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   final _textController = TextEditingController();
   final _amountController = TextEditingController();
+  DateTime? _selectedDate;
+
+  // async function for  picks date
+  void _selectDatePicker() async {
+    final now = DateTime.now();
+    final firstDate = DateTime(
+      now.day,
+      now.month,
+      now.year - 1,
+    );
+
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: firstDate,
+      lastDate: now,
+    );
+    setState(() {
+      _selectedDate = pickedDate;
+    });
+  }
 
   @override
   void dispose() {
@@ -31,12 +54,35 @@ class _NewExpenseState extends State<NewExpense> {
               label: Text("Title"),
             ),
           ),
-          TextField(
-            controller: _amountController,
-            // maxLength: 10,
-            decoration: const InputDecoration(
-              label: Text("Amount"),
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _amountController,
+                  keyboardType: TextInputType.number,
+                  // maxLength: 10,
+                  decoration: const InputDecoration(
+                    label: Text("Amount"),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 14,
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(_selectedDate == null
+                        ? " No Selected Date"
+                        : formatter.format(_selectedDate!)),
+                    IconButton(
+                        onPressed: _selectDatePicker,
+                        icon: const Icon(FontAwesomeIcons.calendarDays))
+                  ],
+                ),
+              )
+            ],
           ),
           Row(
             children: [
