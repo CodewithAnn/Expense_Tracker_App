@@ -29,7 +29,24 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpense() {
     showModalBottomSheet(
-        context: context, builder: (cntx) => const NewExpense());
+        isScrollControlled: true,
+        context: context,
+        builder: (cntx) => NewExpense(
+              onAddExpense: addExpenses,
+            ));
+  }
+
+  void addExpenses(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
+  }
+
+  // method for remove expenses
+  void _removeExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
   }
 
   @override
@@ -45,7 +62,8 @@ class _ExpensesState extends State<Expenses> {
       ),
       body: Column(children: [
         Expanded(
-          child: ExpenseList(expense: _registeredExpenses),
+          child: ExpenseList(
+              expense: _registeredExpenses, onRemoveExpense: _removeExpense),
         )
       ]),
     );
