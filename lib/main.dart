@@ -6,6 +6,7 @@ void main() {
   runApp(
     MaterialApp(
       theme: kThemeData,
+      darkTheme: kDarkTheme,
       debugShowCheckedModeBanner: false,
       home: const Expenses(),
     ),

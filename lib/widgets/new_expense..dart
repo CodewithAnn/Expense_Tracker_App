@@ -116,7 +116,8 @@ class _NewExpenseState extends State<NewExpense> {
                         : formatter.format(_selectedDate!)),
                     IconButton(
                         onPressed: _selectDatePicker,
-                        icon: const Icon(FontAwesomeIcons.calendarDays))
+                        icon: Icon(FontAwesomeIcons.calendarDays,
+                            color: Theme.of(context).primaryColorDark))
                   ],
                 ),
               )
@@ -128,6 +129,7 @@ class _NewExpenseState extends State<NewExpense> {
           Row(
             children: [
               DropdownButton(
+                  dropdownColor: Theme.of(context).primaryColorLight,
                   value: _selectedCategory,
                   items: Category.values
                       .map(

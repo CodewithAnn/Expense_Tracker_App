@@ -27,3 +27,36 @@ var kThemeData = ThemeData().copyWith(
         ),
       ),
 );
+
+// darkTheme
+var kDarkTheme = ThemeData.dark().copyWith(
+  colorScheme: kDarkColorScheme,
+  appBarTheme: const AppBarTheme().copyWith(
+    backgroundColor: kDarkColorScheme.onPrimaryContainer,
+    foregroundColor: kDarkColorScheme.primaryContainer,
+  ),
+  cardTheme: const CardTheme().copyWith(
+    color: kDarkColorScheme.secondaryContainer,
+    margin: const EdgeInsets.symmetric(
+      vertical: 9,
+      horizontal: 15,
+    ),
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: kDarkColorScheme.primaryContainer,
+      foregroundColor: kDarkColorScheme.onPrimaryContainer,
+    ),
+  ),
+  textTheme: ThemeData().textTheme.copyWith(
+        titleLarge: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: kDarkColorScheme.onSecondaryContainer,
+          fontSize: 24,
+        ),
+      ),
+  dropdownMenuTheme: DropdownMenuThemeData().copyWith(
+    textStyle: TextStyle(color: kDarkColorScheme.onPrimaryContainer),
+  ),
+  
+);
