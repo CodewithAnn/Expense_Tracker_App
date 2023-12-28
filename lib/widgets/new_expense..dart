@@ -37,6 +37,31 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
+  // method for showing error messages
+  void _submitExpenseData() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    final amountIsinvalid = enteredAmount == null || enteredAmount <= 0;
+    if (_textController.text.trim().isEmpty ||
+        amountIsinvalid ||
+        _selectedDate == null) {
+      showDialog(
+          context: context,
+          builder: (cntx) => AlertDialog(
+                title: const Text("Invalid input"),
+                content: const Text(
+                    "Please entered valid title, amount , date and category was entered"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(cntx);
+                      },
+                      child: const Text("Okay"))
+                ],
+              ));
+      return;
+    }
+  }
+
   @override
   void dispose() {
     _textController.dispose();
@@ -119,7 +144,7 @@ class _NewExpenseState extends State<NewExpense> {
                   },
                   child: const Text('Cancel')),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: _submitExpenseData,
                 child: const Text("Save Expense"),
               ),
             ],
