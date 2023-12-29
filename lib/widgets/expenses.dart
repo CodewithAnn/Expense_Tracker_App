@@ -66,22 +66,39 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Expensy'),
-        actions: [
-          IconButton(
-              onPressed: _openAddExpense,
-              icon: const Icon(FontAwesomeIcons.solidSquarePlus))
-        ],
-      ),
-      body: Column(children: [
-        Chart(expenses: _registeredExpenses),
-        Expanded(
-          child: ExpenseList(
-              expense: _registeredExpenses, onRemoveExpense: _removeExpense),
-        )
-      ]),
-    );
+        appBar: AppBar(
+          title: const Text('Expensy'),
+          actions: [
+            IconButton(
+                onPressed: _openAddExpense,
+                icon: const Icon(FontAwesomeIcons.solidSquarePlus))
+          ],
+        ),
+        body: width <= 600
+            ? Column(
+                children: [
+                  Chart(expenses: _registeredExpenses),
+                  Expanded(
+                    child: ExpenseList(
+                      expense: _registeredExpenses,
+                      onRemoveExpense: _removeExpense,
+                    ),
+                  )
+                ],
+              )
+            : Row(
+                children: [
+                  Expanded(child: Chart(expenses: _registeredExpenses)),
+                  Expanded(
+                    child: ExpenseList(
+                      expense: _registeredExpenses,
+                      onRemoveExpense: _removeExpense,
+                    ),
+                  )
+                ],
+              ));
   }
 }
